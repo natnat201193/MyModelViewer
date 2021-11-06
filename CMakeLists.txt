@@ -7,3 +7,4 @@ project ("MyModelViewer")
 
 # Include sub-projects.
 add_subdirectory ("MyModelViewer")
+add_subdirectory(dependencies/glfw)
