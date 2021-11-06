@@ -18,3 +18,7 @@
 	path = dependencies/assimp
 	url = https://github.com/assimp/assimp.git
 	branch = master
+[submodule "dependencies/glad"]
+	path = dependencies/glad
+	url = https://github.com/Dav1dde/glad.git
+	branch = glad2
