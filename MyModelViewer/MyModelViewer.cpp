@@ -1,17 +1,6 @@
 ﻿#include <iostream>
-// GLAD
-#include <glad/glad.h>
-// GLFW
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
-
-
-// This example is taken from https://learnopengl.com/
-// https://learnopengl.com/code_viewer.php?code=getting-started/hellowindow2
-// The code originally used GLEW, I replaced it with Glad
-
-// Compile:
-// g++ example/c++/hellowindow2.cpp -Ibuild/include build/src/glad.c -lglfw -ldl
-
 
 // Function prototypes
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
@@ -19,15 +8,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
 
-// The MAIN function, from here we start the application and run the game loop
 int main()
 {
-    std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
+    std::cout << "Starting GLFW context, OpenGL 4.6" << std::endl;
     // Init GLFW
     glfwInit();
     // Set all the required options for GLFW
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
@@ -44,11 +32,16 @@ int main()
     // Set the required callback functions
     glfwSetKeyCallback(window, key_callback);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    // Load OpenGL functions, gladLoadGL returns the loaded version, 0 on error.
+    int version = gladLoadGL(glfwGetProcAddress);
+    if (version == 0)
     {
         std::cout << "Failed to initialize OpenGL context" << std::endl;
         return -1;
     }
+
+    // Successfully loaded OpenGL
+    std::cout << "Loaded OpenGL " << GLAD_VERSION_MAJOR(version) << "." << GLAD_VERSION_MINOR(version) << std::endl;
 
     // Define the viewport dimensions
     glViewport(0, 0, WIDTH, HEIGHT);
@@ -76,7 +69,6 @@ int main()
 // Is called whenever a key is pressed/released via GLFW
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-    std::cout << key << std::endl;
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
 }

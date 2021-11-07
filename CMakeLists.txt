@@ -15,5 +15,7 @@ set(GLAD_SOURCES_DIR "${PROJECT_SOURCE_DIR}/dependencies/glad")
 add_subdirectory("${GLAD_SOURCES_DIR}/cmake" glad_cmake)
 
 # Specify glad settings
-glad_add_library(glad REPRODUCIBLE API gl:core=4.6)
+glad_add_library(glad REPRODUCIBLE API gl:core=3.3)
 
+include_directories(
+	dependencies/glfw/include/)
