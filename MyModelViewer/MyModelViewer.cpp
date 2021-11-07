@@ -1,7 +1,4 @@
-﻿#include <iostream>
-
-#include <glad/gl.h>
-#include <GLFW/glfw3.h>
+﻿#include "MyModelViewer.h"
 
 // Function prototypes
 GLFWwindow* create_window(const char* name, int major, int minor);
