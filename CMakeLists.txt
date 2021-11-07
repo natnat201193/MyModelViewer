@@ -8,14 +8,10 @@ project ("MyModelViewer" C CXX)
 # Include sub-projects.
 add_subdirectory ("MyModelViewer")
 add_subdirectory(dependencies/glfw)
-
-# Path to glad directory
-set(GLAD_SOURCES_DIR "${PROJECT_SOURCE_DIR}/dependencies/glad")
-# Path to glad cmake files
-add_subdirectory("${GLAD_SOURCES_DIR}/cmake" glad_cmake)
+include("dependencies/glad/cmake/CMakeLists.txt")
 
 # Specify glad settings
-glad_add_library(glad REPRODUCIBLE API gl:core=3.3)
+glad_add_library(glad REPRODUCIBLE MX MXGLOBAL LANGUAGE C CXX API gl:core=4.6)
 
 include_directories(
 	dependencies/glfw/include/)
